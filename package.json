@@ -21,7 +21,21 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "hyperapp": "^1.2.5"
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-runtime": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "got": "^8.3.0",
+    "hyperapp": "^1.2.5",
+    "ssl-root-cas": "^1.2.5"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

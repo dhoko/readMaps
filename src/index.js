@@ -35,7 +35,7 @@ const view = (state, actions) => {
         const data = { body: s };
         console.log('INIT', data);
 
-        const main = app(data, actions, view, document.body);
+        app(data, actions, view, document.body);
     } catch (e) {
         console.error(e);
     }

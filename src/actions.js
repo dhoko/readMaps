@@ -7,6 +7,10 @@ const request = axios.create({
 export const setOutput = (output) => ({ output });
 
 export const submit = () => async (state, actions) => {
-    const data = await request.post('convert', { body: state.body });
-    actions.setOutput(data.data);
+    try {
+        const data = await request.post('convert', { body: state.body });
+        actions.setOutput(data.data);
+    } catch (e) {
+        actions.setOutput(e.response.data);
+    }
 };

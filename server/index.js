@@ -29,19 +29,16 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json());
 app.use(compression());
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const getSourceMap = async (url) => {
     const response = await got(url);
     return response.body;
 };
 
-const parse = async (url, body) => {
+const parse = async (body) => {
     try {
-        const [urlMap = '', name] = url.match(/(app|appLazy)\..+/);
-        console.log({ urlMap, name, url });
-        const map = await getSourceMap(url);
-        const info = sourceMap.readder([urlMap], { [name]: map });
         return {
-            output: sourceMap.extract.convert(body, info).join('\n')
+            output: await sourceMap.format(body, '(appLazy|app)', getSourceMap)
         };
     } catch (e) {
         console.log(e);
@@ -53,23 +50,12 @@ const parse = async (url, body) => {
 };
 
 app.post('/convert', (req, res, next) => {
-    const list = req.body.body.split('https');
-    const str = list.find((item) => /(:\/\/.+\.js):/.test(item || '')) || '';
-    const [url] = str.split('.js');
-    parse(`https${url}.js.map`, req.body.body)
+    const { body = '' } = req.body || {};
+    parse(body)
         .then(({ status = 200, output }) => res.status(status).send(output))
         .catch(next);
 });
 
-app.post('/', (req, res, next) => {
-    const list = req.body.body.split('https');
-    const str = list.find((item) => /(:\/\/.+\.js):/.test(item || ''));
-    const [url] = str.split('.js');
-    parse(`https${url}.js.map`, req.body.body)
-        .then((map) => res.send(map))
-        .catch(next);
-});
-
 app.listen(1442, () => {
-    console.log('Example app listening on port 1442!');
+    console.log('3615 readMaps port@1442!');
 });

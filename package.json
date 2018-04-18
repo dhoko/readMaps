@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
-    "dist": "parcel build index.html",
+    "dist": " del ./dist && parcel build index.html",
     "precommit": "lint-staged",
     "lint": "eslint src/**/*.js --quiet",
     "pretty": "prettier --write $(find src/app -type f -name '*.js')",
@@ -37,10 +37,11 @@
     "express": "^4.16.3",
     "got": "^8.3.0",
     "hyperapp": "^1.2.5",
-    "parse-source-maps": "github:ProtonMail/source-map-parser#feat/nodejsApi",
+    "parse-source-maps": "github:ProtonMail/source-map-parser#ba926922ff56a807df443a0ad932a370d4766543",
     "ssl-root-cas": "^1.2.5"
   },
   "devDependencies": {
+    "del-cli": "^1.1.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.11.0",
